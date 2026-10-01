@@ -1,5 +1,19 @@
 # DropZone
+
 Self-hosted file hosting website with Google login.
+
+## Features
+
+- Google OAuth sign-in, restricted to a whitelist of emails
+- File manager: browse, create folders, rename, copy, move, delete
+- Chunked uploads (large files supported)
+- Downloads with resume support (HTTP range requests)
+- Files stored on your own machine, in a folder you choose
+
+## Requirements
+
+- [Node.js](https://nodejs.org) 18 or newer (`node -v` to check)
+- A Google account to create OAuth credentials
 
 ## Installation
 
@@ -19,18 +33,16 @@ node server.js
 
 The site is available at `http://localhost:3000` (or your `BASE_URL`).
 
-## Requirements
+## Google OAuth setup
 
-- [Node.js](https://nodejs.org) 18 or newer (`node -v` to check)
-- A Google account to create OAuth credentials
+1. Open the [Google Cloud Console](https://console.cloud.google.com) and create a project.
+2. Configure the **OAuth consent screen** (External, add yourself as a test user).
+3. Go to **Credentials** > **Create credentials** > **OAuth client ID** > **Web application**.
+4. Add this **Authorized redirect URI**: `<BASE_URL>/auth/callback`
+   (e.g. `http://localhost:3000/auth/callback`).
+5. Copy the client ID and secret into `.env`.
 
-## Features
-
-- Google OAuth sign-in, restricted to a whitelist of emails
-- File manager: browse, create folders, rename, copy, move, delete
-- Chunked uploads (large files supported)
-- Downloads with resume support (HTTP range requests)
-- Files stored on your own machine, in a folder you choose
+Each person who installs DropZone uses their own credentials and their own storage.
 
 ## Configuration
 
@@ -54,16 +66,11 @@ Generate a `SESSION_SECRET`:
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ```
 
-## Google OAuth setup
+## Usage
 
-1. Open the [Google Cloud Console](https://console.cloud.google.com) and create a project.
-2. Configure the **OAuth consent screen** (External, add yourself as a test user).
-3. Go to **Credentials** > **Create credentials** > **OAuth client ID** > **Web application**.
-4. Add this **Authorized redirect URI**: `<BASE_URL>/auth/callback`
-   (e.g. `http://localhost:3000/auth/callback`).
-5. Copy the client ID and secret into `.env`.
-
-Each person who installs DropZone uses their own credentials and their own storage.
+1. Open the site and sign in with an authorized Google account.
+2. Upload, organize and download your files from the interface.
+3. Sign out with `/auth/logout`.
 
 ## Project structure
 
@@ -75,12 +82,6 @@ DropZone/            <- repository root
     ├── package.json
     └── public/      <- web interface
 ```
-
-## Usage
-
-1. Open the site and sign in with an authorized Google account.
-2. Upload, organize and download your files from the interface.
-3. Sign out with `/auth/logout`.
 
 ## Deployment notes
 
