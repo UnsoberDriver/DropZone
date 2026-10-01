@@ -1,7 +1,6 @@
 # DropZone
 Self-hosted file hosting website with Google login.
 
-```
 ## Installation
 
 ```bash
