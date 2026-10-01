@@ -20,6 +20,11 @@ node server.js
 
 The site is available at `http://localhost:3000` (or your `BASE_URL`).
 
+## Requirements
+
+- [Node.js](https://nodejs.org) 18 or newer (`node -v` to check)
+- A Google account to create OAuth credentials
+
 ## Features
 
 - Google OAuth sign-in, restricted to a whitelist of emails
@@ -27,25 +32,6 @@ The site is available at `http://localhost:3000` (or your `BASE_URL`).
 - Chunked uploads (large files supported)
 - Downloads with resume support (HTTP range requests)
 - Files stored on your own machine, in a folder you choose
-
-## Requirements
-
-- [Node.js](https://nodejs.org) 18 or newer (`node -v` to check)
-- A Google account to create OAuth credentials
-
-## Project structure
-
-```
-DropZone/            <- repository root
-├── .env             <- your configuration (never committed)
-├── .env.example     <- configuration template
-├── .gitignore
-├── README.md
-└── DropZone/
-    ├── server.js
-    ├── package.json
-    └── public/      <- web interface
-```
 
 ## Configuration
 
@@ -79,6 +65,20 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 5. Copy the client ID and secret into `.env`.
 
 Each person who installs DropZone uses their own credentials and their own storage.
+
+## Project structure
+
+```
+DropZone/            <- repository root
+├── .env             <- your configuration (never committed)
+├── .env.example     <- configuration template
+├── .gitignore
+├── README.md
+└── DropZone/
+    ├── server.js
+    ├── package.json
+    └── public/      <- web interface
+```
 
 ## Usage
 
