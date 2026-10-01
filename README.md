@@ -20,7 +20,7 @@ Self-hosted file hosting website with Google login.
 
 Pick your system: [Linux](#linux-debian--ubuntu) or [Windows](#windows). Then fill in `.env` (see [Google OAuth setup](#google-oauth-setup) and [Configuration](#configuration)) and start the server.
 
-### Linux (Debian / Ubuntu)
+## Linux (Debian / Ubuntu)
 
 **1. Install Git and Node.js**
 
@@ -51,7 +51,7 @@ npm install
 node server.js
 ```
 
-### Windows
+## Windows
 
 **1. Install Git and Node.js**
 
