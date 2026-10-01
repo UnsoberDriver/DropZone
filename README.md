@@ -1,15 +1,24 @@
 # DropZone
 Self-hosted file hosting website with Google login.
 
-# Installation process
+```
+## Installation
+
 ```bash
 git clone https://github.com/UnsoberDriver/DropZone
 cd DropZone
-cp .env.example .env
+cp .env.example .env      # Windows: copy .env.example .env
 cd DropZone
 npm install
+```
+
+Fill in `.env` (see below), then start the server:
+
+```bash
 node server.js
 ```
+
+The site is available at `http://localhost:3000` (or your `BASE_URL`).
 
 ## Features
 
@@ -37,24 +46,6 @@ DropZone/            <- repository root
     ├── package.json
     └── public/      <- web interface
 ```
-
-## Installation
-
-```bash
-git clone https://github.com/UnsoberDriver/DropZone
-cd DropZone
-cp .env.example .env      # Windows: copy .env.example .env
-cd DropZone
-npm install
-```
-
-Fill in `.env` (see below), then start the server:
-
-```bash
-node server.js
-```
-
-The site is available at `http://localhost:3000` (or your `BASE_URL`).
 
 ## Configuration
 
