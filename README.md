@@ -70,10 +70,7 @@ Each person who installs DropZone uses their own credentials and their own stora
 
 ```
 DropZone/            <- repository root
-├── .env             <- your configuration (never committed)
 ├── .env.example     <- configuration template
-├── .gitignore
-├── README.md
 └── DropZone/
     ├── server.js
     ├── package.json
