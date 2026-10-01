@@ -1,5 +1,5 @@
 # DropZone
-File hosting website
+Self-hosted file hosting website with Google login.
 
 # Installation process
 ```bash
@@ -10,10 +10,6 @@ cd DropZone
 npm install
 node server.js
 ```
-
-# DropZone
-
-Self-hosted file hosting website with Google login.
 
 ## Features
 
