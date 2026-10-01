@@ -13,21 +13,71 @@ Self-hosted file hosting website with Google login.
 ## Requirements
 
 - [Node.js](https://nodejs.org) 18 or newer (`node -v` to check)
+- [Git](https://git-scm.com)
 - A Google account to create OAuth credentials
 
 ## Installation
 
+Pick your system: [Linux](#linux-debian--ubuntu) or [Windows](#windows). Then fill in `.env` (see [Google OAuth setup](#google-oauth-setup) and [Configuration](#configuration)) and start the server.
+
+### Linux (Debian / Ubuntu)
+
+**1. Install Git and Node.js**
+
+The Node.js version in the default repositories is often too old, so use NodeSource:
+
+```bash
+sudo apt update
+sudo apt install -y git curl
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt install -y nodejs
+node -v
+```
+
+**2. Get the code and install dependencies**
+
 ```bash
 git clone https://github.com/UnsoberDriver/DropZone
 cd DropZone
-cp .env.example .env      # Windows: copy .env.example .env
+cp .env.example .env
+nano .env
 cd DropZone
 npm install
 ```
 
-Fill in `.env` (see below), then start the server:
+**3. Start the server**
 
 ```bash
+node server.js
+```
+
+### Windows
+
+**1. Install Git and Node.js**
+
+In PowerShell:
+
+```powershell
+winget install Git.Git
+winget install OpenJS.NodeJS.LTS
+```
+
+Close and reopen PowerShell, then check with `node -v`. You can also download both installers from their websites.
+
+**2. Get the code and install dependencies**
+
+```powershell
+git clone https://github.com/UnsoberDriver/DropZone
+cd DropZone
+copy .env.example .env
+notepad .env
+cd DropZone
+npm install
+```
+
+**3. Start the server**
+
+```powershell
 node server.js
 ```
 
@@ -58,9 +108,11 @@ The `.env` file is read from the repository root, one level above `server.js`.
 | `STORAGE_DIR` | No | Folder where files are stored (default: `./files`) |
 | `PORT` | No | Server port (default: `3000`) |
 
+Example `STORAGE_DIR` values: `/srv/dropzone` (Linux) or `D:\DropZoneFiles` (Windows).
+
 The server refuses to start if a required variable is missing.
 
-Generate a `SESSION_SECRET`:
+Generate a `SESSION_SECRET` (same command on Linux and Windows):
 
 ```bash
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
@@ -88,9 +140,18 @@ DropZone/            <- repository root
 - Session cookies are marked `Secure`: use HTTPS (e.g. behind a reverse proxy or tunnel) when exposing the site beyond `localhost`.
 - The server trusts the first proxy (`trust proxy`), so it works behind Nginx, Caddy or Cloudflare Tunnel.
 - Keep `.env` private. If it is ever published, regenerate the Google client secret and `SESSION_SECRET`.
+- To keep the server running in the background on Linux or Windows, use [PM2](https://pm2.keymetrics.io):
+  ```bash
+  npm install -g pm2
+  pm2 start server.js --name dropzone
+  pm2 save
+  ```
+  On Linux, run `pm2 startup` once to restart it automatically at boot.
 
 ## Troubleshooting
 
 - **`Config auth manquante (.env)`**: a required variable is missing, or `.env` is not in the repository root.
 - **`Accès refusé`**: the Google account is not listed in `ALLOWED_EMAILS`.
 - **`redirect_uri_mismatch`**: the redirect URI in Google Cloud does not exactly match `<BASE_URL>/auth/callback`.
+- **`'node' is not recognized` (Windows)**: close and reopen the terminal after installing Node.js.
+- **`EADDRINUSE`**: the port is already used. Change `PORT` in `.env`.
