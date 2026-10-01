@@ -9,4 +9,4 @@ cp .env.example .env
 cd DropZone
 npm install
 node server.js
-```bash
+```
